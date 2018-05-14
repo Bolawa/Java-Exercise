@@ -1,0 +1,19 @@
+package detailsOfaFile;
+
+import java.io.File;
+
+import javax.activation.MimetypesFileTypeMap;
+
+public class Filename {
+
+	public static void main(String[] args) {
+		File f = new File("C:\\Users\\PC\\Desktop\\Vehicle Details.xlsx");
+		MimetypesFileTypeMap mimetype = new MimetypesFileTypeMap ();
+   System.out.println("Does the file,Vehicle details exist? "+f.exists());// To check if the file exist
+   System.out.println("File Name is "+f.getName());// To get the name of the file 
+   System.out.println("File sieze in bytes is " + f.length());// To get the sieze of the file 
+   System.out.println("File Mime Type is "+mimetype.getContentType
+		   ("C:\\Users\\PC\\Desktop\\Vehicle Details.xlsx"));//To get the Mime Type of the file 
+	}
+
+}
