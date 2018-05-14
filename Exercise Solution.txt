@@ -1,0 +1,49 @@
+package iDENTITYE2ETest4JavaExercise;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Question2 {
+
+
+
+	public static void main(String[] args) throws IOException {
+		
+		// To Specify file source 
+		File f = new File("C:\\Users\\PC\\Desktop\\Vehicle Details.xlsx");
+		//To create an object of the fILEiNPUTSTREAM Class
+		FileInputStream f2 = new FileInputStream(f);
+		XSSFWorkbook wb = new XSSFWorkbook(f2);
+		
+		XSSFSheet sheet1 = wb.getSheetAt(0);
+		
+		// To create and store an object for registration number from the file
+		String Reg = sheet1.getRow(2).getCell(4).getStringCellValue();
+		
+		// To print out Registration number from file 
+		System.out.println("Vehicle Reg no is " + Reg);
+		wb.close();
+		// To Launch https://www.gov.uk/get-vehicle-information-from-dvla
+		System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(30l, TimeUnit.SECONDS);
+		driver.get("https://www.gov.uk/get-vehicle-information-from-dvla ");
+		driver.findElement(By.xpath("//*[@id=\"get-started\"]/a")).click();
+	    		//To Navigate to Vehicle Registration serach box and provide reg number 
+		driver.findElement(By.id("Vrm")).sendKeys(Reg);//Reg registration number stored from line 25
+		driver.findElement(By.name("Continue")).click();
+	    driver.findElement(By.id("Correct_True")).click();
+	    driver.findElement(By.name("Continue")).click();
+	    
+	    }
+	}
+
+
+
